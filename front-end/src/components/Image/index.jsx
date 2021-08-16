@@ -1,4 +1,6 @@
 import React from 'react'
+import './img/avatars.png'
+
 class Image extends React.Component {
     constructor(props) {
         super(props);
