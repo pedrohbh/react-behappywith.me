@@ -2,16 +2,14 @@ import React from 'react';
 import Input from '../Input';
 import Label from '../Label';
 import GenderSelector from '../GenderSelector';
+import Usuario from '../../models/Usuario';
 
 
 class NovoUsuario extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            usuario: {
-                nome: '',
-                genero: ''
-            },
+            usuario: new Usuario(),
             validacao: {
                 nomeInvalido: false,
                 generoInvalido: false
