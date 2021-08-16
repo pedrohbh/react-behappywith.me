@@ -3,6 +3,7 @@ import Input from '../Input';
 import Label from '../Label';
 import GenderSelector from '../GenderSelector';
 import Usuario from '../../models/Usuario';
+import Button from '../Button';
 
 
 class NovoUsuario extends React.Component {
@@ -34,6 +35,17 @@ class NovoUsuario extends React.Component {
         });
     }
 
+    validar(e) {
+        e.preventDefault();
+        let usuario = this.state.usuario;
+        let validacao = this.state.validacao;
+        validacao.nomeInvalido = !usuario.validarNome();
+        validacao.generoInvalido = !usuario.validarGenero();
+        this.setState({
+            validacao: validacao
+        });
+    }
+
 
     render() {
         return (
@@ -42,14 +54,14 @@ class NovoUsuario extends React.Component {
                     <Label
                         htmlFor="nome"
                         texto="Quem é você?"
-                        valorInvalido={this.state.nomeInvalido}
+                        valorInvalido={this.state.validacao.nomeInvalido}
                     />
                     <Input
                         id="nome"
                         placeholder="Digite seu nome"
                         maxLength="40"
                         readOnly={false}
-                        valorInvalido={this.state.nomeInvalido}
+                        valorInvalido={this.state.validacao.nomeInvalido}
                         defaultValue={this.state.usuario.nome}
                         onChange={this.atualizarNome.bind(this)}
                     />
@@ -61,6 +73,11 @@ class NovoUsuario extends React.Component {
                         valorInvalido={this.state.validacao.generoInvalido}
                         genero={this.state.usuario.genero}
                         atualizarGenero={this.atualizarGenero.bind(this)}
+                    />
+                    <Button
+                        principal
+                        texto="Próximo"
+                        onClick={this.validar.bind(this)}
                     />
                 </form>
             </div>

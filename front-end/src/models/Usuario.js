@@ -1,23 +1,21 @@
-class Usuario
-{
-    constructor()
-    {
+class Usuario {
+    constructor() {
         this.nome = '';
-        this.genero  = '';
+        this.genero = '';
     }
 
 
-    validarNome()
-    {
-        if ( typeof this.nome === 'string' && this.nome.length != 0 && this.nome.length <= 40 )
-        {
+    validarNome() {
+        if (
+            typeof this.nome === 'string' &&
+            this.nome.length != 0 &&
+            this.nome.length <= 40) {
             return true;
         }
         return false;
     }
 
-    validarGenero()
-    {
+    validarGenero() {
         return ['m', 'f'].some(param => {
             return this.genero === param
         })
