@@ -4,6 +4,9 @@ import Label from '../Label';
 import GenderSelector from '../GenderSelector';
 import Usuario from '../../models/Usuario';
 import Button from '../Button';
+import Toast from '../Toast'
+import ImageScroller from '../ImageScroller'
+import Avatar from '../../models/Avatar';
 
 
 class NovoUsuario extends React.Component {
@@ -111,7 +114,10 @@ class NovoUsuario extends React.Component {
                         texto="Voltar"
                         onClick={e => {
                             e.preventDefault();
+                            let usuario = this.state.usuario
+                            usuario.avatar = Avatar.obterTodos()[0];
                             this.setState({
+                                usuario: usuario,
                                 primeiraVisaoCompleta: false
                             });
                         }}
@@ -119,6 +125,10 @@ class NovoUsuario extends React.Component {
                     <Button
                         principal
                         texto="Salvar"
+                        onClick={e => {
+                            e.preventDefault()
+                            this.props.onSubmit(this.state.usuario)
+                        }}
                     />
                 </section>
             )
@@ -133,6 +143,16 @@ class NovoUsuario extends React.Component {
                 </section>
             )
         }
+    }
+
+    atualizarGenero(e, genero) {
+        e.preventDefault();
+        let usuario = this.state.usuario;
+        usuario.genero = genero;
+        usuario.avatar = Avatar.obterTodos()[0];
+        this.setState({
+            usuario: usuario
+        });
     }
 
 
